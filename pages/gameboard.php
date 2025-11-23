@@ -2,12 +2,12 @@
 session_start();
 require_once "questions.php";
 
-if (!isset($_SESSION['players'])) {
-    header("Location: index.html");
+if (!isset($_SESSION['players']) || empty($_SESSION['players'])) {
+    header("Location: setup.html");
     exit();
 }
 
-// Build a temporary board variable
+// Build dynamic board HTML
 $board_html = "<div class='board'>";
 
 foreach ($questions as $category => $qs) {
@@ -21,12 +21,10 @@ foreach ($questions as $category => $qs) {
         ";
     }
 
+    $board_html .= "</div>";
 }
-
-$board_html .= "</div>";
 
 $_SESSION['board_render'] = $board_html;
 
 header("Location: gameboard.html");
 exit();
-?>
