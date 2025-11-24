@@ -2,6 +2,11 @@
 <?php
 session_start();
 
+if (isset($_SESSION['last_msg'])) {
+    echo "<p style='text-align:center; font-weight:bold; color:#ffd700;'>" . $_SESSION['last_msg'] . "</p>";
+    unset($_SESSION['last_msg']);
+}
+
 if (isset($_SESSION['board_render'])) {
     echo $_SESSION['board_render'];
 } else {

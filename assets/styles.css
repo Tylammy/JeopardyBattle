@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif; /* base font */
+    background-color: #f0f8ff; /* light blue background */
+    margin: 0;
+    padding: 0;
+}
+
+.page-container {
+    width: 90%;
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #ffffff; /* white card */
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    border-radius: 10px; /* rounded corners */
+}
+
+h2 {
+    text-align: center;
+    color: #1a1a1a; /* dark title */
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* spacing between fields */
+}
+
+label {
+    font-weight: bold; /* LABEL IN BOLD */
+}
+
+input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #aaa; /* light gray border */
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #0077cc; /* JEOPARDY BLUE */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; /* pointer on hover */
+}
+
+button:hover {
+    background-color: #005fa3; /* darker on hover */
+}
+
+/* Error message styling */
+p {
+    color: red; /* red text for errors */
+    font-weight: bold;
+    text-align: center; /* center align */
+}
+
+/* Homepage buttons */
+.home-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; /* center horizontally */
+    margin-top: 50px;
+}
+
+.home-buttons a {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 18px;
+    background-color: #0077cc; /* blue */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.home-buttons a:hover {
+    background-color: #005fa3; /* darker blue */
+}

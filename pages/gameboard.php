@@ -1,30 +1,39 @@
 <?php
 session_start();
-require_once "questions.php";
+require_once "questions.php"; // question database
 
 if (!isset($_SESSION['players']) || empty($_SESSION['players'])) {
     header("Location: setup.html");
     exit();
 }
 
-// Build dynamic board HTML
-$board_html = "<div class='board'>";
+include '../includes/header.php';
 
-foreach ($questions as $category => $qs) {
-    $board_html .= "<div class='column'><h3>$category</h3>";
+// display player scores
+echo "<div class='player-scores'>";
+foreach ($_SESSION['players'] as $i => $playerName) {
+    $score = $_SESSION['scores'][$i] ?? 0;
+    echo "<div class='player-score'><strong>" . htmlspecialchars($playerName) . ":</strong> $" . $score . "</div>";
+}
+echo "</div>";
 
-    foreach ($qs as $i => $q) {
-        $board_html .= "
-            <a class='tile' href='question.php?cat=" . urlencode($category) . "&i=$i'>
-                $" . $q['value'] . "
-            </a>
-        ";
-    }
-
-    $board_html .= "</div>";
+// show last answer message if exists
+if (isset($_SESSION['last_msg'])) {
+    echo "<p style='text-align:center; font-weight:bold; color:#ffd700;'>" . $_SESSION['last_msg'] . "</p>";
+    unset($_SESSION['last_msg']);
 }
 
-$_SESSION['board_render'] = $board_html;
+// build board
+echo "<div class='board'>";
+foreach ($questions as $category => $qs) {
+    echo "<div class='column'><h3>$category</h3>";
+    foreach ($qs as $i => $q) {
+        echo "<a class='tile' href='question.php?cat=" . urlencode($category) . "&i=$i'>
+                $" . $q['value'] . "
+              </a>";
+    }
+    echo "</div>";
+}
+echo "</div>";
 
-header("Location: gameboard.html");
-exit();
+include '../includes/footer.php';

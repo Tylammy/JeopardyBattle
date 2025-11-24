@@ -1,18 +1,33 @@
-<?php
-session_start();
+<?php session_start(); ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Player Setup - Jeopardy Battle</title>
+    <link rel="stylesheet" href="../assets/styles.css">
+</head>
+<body>
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['players'])) {
-    $players = array_filter($_POST['players']);
-    if (count($players) < 2) {
-        $_SESSION['error'] = "Please enter at least 2 players.";
-        header("Location: setup.html");
-        exit();
+<div class="page-container">
+    <h2>Enter Player Names</h2>
+
+    <?php
+    // Show error if fewer than 2 players submitted previously
+    if (isset($_SESSION['error'])) {
+        echo "<p style='color:red; font-weight:bold;'>" . $_SESSION['error'] . "</p>";
+        unset($_SESSION['error']);
     }
-    $_SESSION['players'] = $players;
-    $_SESSION['scores'] = array_fill(0, count($players), 0);
-    header("Location: gameboard.php");
-    exit();
-} else {
-    header("Location: setup.html");
-    exit();
-}
+    ?>
+
+    <form action="setup_process.php" method="POST">
+        <label>Player 1:</label>
+        <input type="text" name="players[]" required>
+
+        <label>Player 2:</label>
+        <input type="text" name="players[]" required>
+
+        <button type="submit">Start Game</button>
+    </form>
+</div>
+
+</body>
+</html>
